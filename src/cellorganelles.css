@@ -31,3 +31,8 @@
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
 }
+
+#canva_cell{
+    height: 50;
+    width:  50;
+}
