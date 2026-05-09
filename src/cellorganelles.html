@@ -12,7 +12,7 @@
         <h1>Dreamlite</h1>
     </div>
 <!--navbar-->
-    <div id="sidebar">
+    <!-- <div id="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="#">Cell</a>
     <a href="#">Nucleous</a>
@@ -22,21 +22,13 @@
     <a href="#">Golgi Apparatus</a>
     </div>
       <button class="openbtn" onclick="openNav()">Choose Organelles</button>
-  <div id="canva_cell">
-
+  <div id="canva_cell"> -->
+    <canvas id="c"></canvas>
+    <p>
+    <span id="cell" class="ccell">Cell</span>
+    </p>
   </div>
-<script>
-    function openNav() {
-  document.getElementById("sidebar").style.width = "250px";
-  document.getElementById("cellorganelles").style.marginLeft = "250px";
-}
 
-
-function closeNav() {
-  document.getElementById("sidebar").style.width = "0";
-  document.getElementById("cellorganelles").style.marginLeft = "0";
-} 
-  </script>
    <script type="module" src="cellorganelles.js"></script>
 </body>
 </html>
