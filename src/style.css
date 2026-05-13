@@ -1,5 +1,40 @@
-  /* index.html */
-  *{
-  background: #111;
-  color:#bfa76f;
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #111;
+  color: #bfa76f;
+  font-family: sans-serif;
 }
+
+#homepage_box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; 
+  height: 50vh;
+  background: rgba(255, 255, 255, 0.03); /* Very faint box */
+  padding: 60px;
+  backdrop-filter: blur(10px); 
+}
+
+.button-group {
+  display: flex;
+  gap: 15px; 
+}
+
+.button {
+  width: 140px;
+  height: 40px;
+  background: transparent;
+  color: #bfa76f;
+  border: 2px solid #bfa76f; 
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background: #bfa76f;
+  color: #111;
+}
+
