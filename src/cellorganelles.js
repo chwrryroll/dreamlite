@@ -8,8 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
     initGolgi();
     initLysosomes();
     initVacuoles();
+    initAnimalCell();
+    initPlantCell();
     setupTabs();
 });
+
+//tab setup
 
 function setupTabs() {
     const buttons = document.querySelectorAll("#cell_bar button");
@@ -31,6 +35,7 @@ function setupTabs() {
     });
     if(buttons[0]) buttons[0].classList.add("active");
 }
+//nucleus (1)
 
 function initNucleus() {
     var container = document.getElementById('nucleus_dia');
@@ -237,6 +242,8 @@ function initNucleus() {
     });
 }
 
+//mitochondria (2)
+
 function initMitochondria() {
     var container = document.getElementById('mitochondria_dia');
     if (!container) return;
@@ -423,6 +430,8 @@ function initMitochondria() {
     resizeMito();
 }
 
+//er(3)
+
 function initER() {
     var container = document.getElementById('er_dia');
     if (!container) return;
@@ -516,6 +525,8 @@ function initER() {
     resizeER();
 }
 
+//golgi(40)
+
 function initGolgi() {
     var container = document.getElementById('ga_dia');
     if (!container) return;
@@ -582,7 +593,7 @@ function initGolgi() {
         mesh.position.x = (i - (cisternaCount / 2)) * 0.32;
         mesh.rotation.y = Math.PI / 2;
         golgiGroup.add(mesh);
-        cisternae.push(mesh);
+         cisternae.push(mesh);
     }
 
     var vesicles = [];
@@ -620,6 +631,8 @@ function initGolgi() {
     resizeGolgi();
 }
 
+//lysosomes(5)
+
 function initLysosomes() {
     var container = document.getElementById('lysosomes_dia');
     if (!container) return;
@@ -640,7 +653,7 @@ function initLysosomes() {
     var ambient = new THREE.AmbientLight(0x450a0a, 3.0);
     scene.add(ambient);
 
-    var dLight = new THREE.DirectionalLight(0xef4444, 6.0);
+    var dLight = new THREE.DirectionalLight(0xdc2626, 6.0);
     dLight.position.set(4, 5, 3);
     scene.add(dLight);
 
@@ -709,6 +722,8 @@ function initLysosomes() {
     window.addEventListener('resize', resizeLysosomes);
     resizeLysosomes();
 }
+
+//vacuoles(5)
 
 function initVacuoles() {
     var container = document.getElementById('vacuoles_dia');
@@ -779,4 +794,316 @@ function initVacuoles() {
     }
     window.addEventListener('resize', resizeVacuoles);
     resizeVacuoles();
+}
+
+//animal cell (6) [no six seven]
+
+function initAnimalCell() {
+    var container = document.getElementById('ac_dia');
+    if (!container) return;
+
+    var scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x010103);
+
+    var camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+    camera.position.set(4, 5, 10);
+
+    var renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(1, 1);
+    container.appendChild(renderer.domElement);
+
+    var controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+
+    var ambient = new THREE.AmbientLight(0x1a1a2e, 2.5);
+    scene.add(ambient);
+
+    var light1 = new THREE.DirectionalLight(0xd8b4fe, 4.0);
+    light1.position.set(5, 8, 5);
+    scene.add(light1);
+
+    var light2 = new THREE.DirectionalLight(0x00ffff, 2.0);
+    light2.position.set(-5, -4, -3);
+    scene.add(light2);
+
+    var cellGroup = new THREE.Group();
+    scene.add(cellGroup);
+
+    var membraneGeo = new THREE.SphereGeometry(2.5, 64, 64);
+    var membraneMat = new THREE.MeshStandardMaterial({
+        color: 0x0284c7,
+        roughness: 0.3,
+        metalness: 0.1,
+        transparent: true,
+        opacity: 0.25,
+        side: THREE.DoubleSide
+    });
+    var membrane = new THREE.Mesh(membraneGeo, membraneMat);
+    cellGroup.add(membrane);
+
+    var nucleusGeo = new THREE.SphereGeometry(0.7, 48, 48);
+    var nucleusMat = new THREE.MeshStandardMaterial({
+        color: 0x6b21a8,
+        emissive: 0x2e1065,
+        roughness: 0.5
+    });
+    var nucleus = new THREE.Mesh(nucleusGeo, nucleusMat);
+    nucleus.position.set(-0.2, 0.1, 0);
+    cellGroup.add(nucleus);
+
+    var nucleolusGeo = new THREE.SphereGeometry(0.2, 32, 32);
+    var nucleolusMat = new THREE.MeshStandardMaterial({
+        color: 0xdb2777,
+        roughness: 0.4
+    });
+    var nucleolus = new THREE.Mesh(nucleolusGeo, nucleolusMat);
+    nucleolus.position.set(0.1, 0.1, 0.1);
+    nucleus.add(nucleolus);
+
+    var mitoGroup = new THREE.Group();
+    cellGroup.add(mitoGroup);
+    var mitoGeo = new THREE.CapsuleGeometry(0.12, 0.3, 16, 32);
+    var mitoMat = new THREE.MeshStandardMaterial({ color: 0xdc2626, roughness: 0.4 });
+    var mitoPositions = [
+        [1.2, 0.8, 0.5], [-1.1, -1.0, 0.6], [0.5, -1.3, -0.8], [-1.3, 0.9, -0.5], [1.0, -0.6, 1.1]
+    ];
+    mitoPositions.forEach(pos => {
+        var m = new THREE.Mesh(mitoGeo, mitoMat);
+        m.position.set(pos[0], pos[1], pos[2]);
+        m.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+        mitoGroup.add(m);
+    });
+
+    var golgiGroup = new THREE.Group();
+    cellGroup.add(golgiGroup);
+    for (let i = 0; i < 4; i++) {
+        let gGeo = new THREE.TorusGeometry(0.35 - (i * 0.04), 0.04, 8, 24, Math.PI * 0.8);
+        let gMat = new THREE.MeshStandardMaterial({ color: 0xea580c, roughness: 0.4 });
+        let gMesh = new THREE.Mesh(gGeo, gMat);
+        gMesh.position.set(0.9, 0.2 + (i * 0.06), -0.5);
+        gMesh.rotation.set(0.3, 0.5, 1.2);
+        golgiGroup.add(gMesh);
+    }
+
+    var vacGeo = new THREE.SphereGeometry(0.22, 24, 24);
+    var vacMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.7, roughness: 0.1 });
+    var vacPositions = [[-0.5, 1.3, 0.7], [0.3, -1.2, 0.5], [-0.8, -0.7, -1.1]];
+    vacPositions.forEach(pos => {
+        var v = new THREE.Mesh(vacGeo, vacMat);
+        v.position.set(pos[0], pos[1], pos[2]);
+        cellGroup.add(v);
+    });
+
+    var lysoGeo = new THREE.SphereGeometry(0.14, 16, 16);
+    var lysoMat = new THREE.MeshStandardMaterial({ color: 0xe11d48, roughness: 0.5 });
+    var lysoPositions = [[0.2, 1.4, -0.6], [-1.4, -0.2, 0.8], [1.4, -0.7, -0.5]];
+    lysoPositions.forEach(pos => {
+        var l = new THREE.Mesh(lysoGeo, lysoMat);
+        l.position.set(pos[0], pos[1], pos[2]);
+        cellGroup.add(l);
+    });
+
+    function animationLoop(t) {
+        cellGroup.rotation.y = t / 8000;
+        cellGroup.rotation.x = Math.sin(t / 10000) * 0.1;
+
+        var posAttr = membraneGeo.attributes.position;
+        var timeFactor = t / 500;
+        for (let i = 0; i < posAttr.count; i++) {
+            let x = posAttr.getX(i);
+            let y = posAttr.getY(i);
+            let z = posAttr.getZ(i);
+            let wave = Math.sin(x * 1.5 + timeFactor) * 0.03 + Math.cos(y * 1.5 + timeFactor) * 0.03;
+            let norm = new THREE.Vector3(x, y, z).normalize().multiplyScalar(2.5 + wave);
+            posAttr.setXYZ(i, norm.x, norm.y, norm.z);
+        }
+        membraneGeo.computeVertexNormals();
+        posAttr.needsUpdate = true;
+
+        controls.update();
+        renderer.render(scene, camera);
+    }
+    renderer.setAnimationLoop(animationLoop);
+
+    function resizeAnimalCell() {
+        if (container.clientWidth > 0 && container.clientHeight > 0) {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth - 16, container.clientHeight - 16);
+        }
+    }
+    window.addEventListener('resize', resizeAnimalCell);
+    resizeAnimalCell();
+}
+
+function initPlantCell() {
+    var container = document.getElementById('pc_dia');
+    if (!container) return;
+
+    var scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x010103);
+
+    var camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+    camera.position.set(5, 6, 11);
+
+    var renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(1, 1);
+    container.appendChild(renderer.domElement);
+
+    var controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+
+    var ambient = new THREE.AmbientLight(0x142b14, 2.5);
+    scene.add(ambient);
+
+    var light1 = new THREE.DirectionalLight(0xa7f3d0, 4.5);
+    light1.position.set(6, 9, 5);
+    scene.add(light1);
+
+    var light2 = new THREE.DirectionalLight(0x38bdf8, 1.5);
+    light2.position.set(-6, -4, -3);
+    scene.add(light2);
+
+    var plantGroup = new THREE.Group();
+    scene.add(plantGroup);
+
+    
+    var wallGeo = new THREE.BoxGeometry(4.6, 4.6, 4.6);
+    var wallMat = new THREE.MeshStandardMaterial({
+        color: 0x15803d,
+        roughness: 0.6,
+        metalness: 0.1,
+        transparent: true,
+        opacity: 0.2,
+        side: THREE.DoubleSide
+    });
+    var cellWall = new THREE.Mesh(wallGeo, wallMat);
+    plantGroup.add(cellWall);
+
+    var wallWireMat = new THREE.MeshBasicMaterial({
+        color: 0x22c55e,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.3
+    });
+    var cellWallWire = new THREE.Mesh(wallGeo, wallWireMat);
+    plantGroup.add(cellWallWire);
+
+    
+    var vacGeo = new THREE.BoxGeometry(1.8, 2.4, 1.8);
+    var vacMat = new THREE.MeshStandardMaterial({
+        color: 0x0284c7,
+        emissive: 0x075985,
+        roughness: 0.1,
+        transparent: true,
+        opacity: 0.6
+    });
+    var centralVacuole = new THREE.Mesh(vacGeo, vacMat);
+    centralVacuole.position.set(0, -0.2, 0);
+    plantGroup.add(centralVacuole);
+
+    
+    var nucleusGeo = new THREE.SphereGeometry(0.65, 48, 48);
+    var nucleusMat = new THREE.MeshStandardMaterial({ color: 0x6b21a8, emissive: 0x3b0764, roughness: 0.5 });
+    var nucleus = new THREE.Mesh(nucleusGeo, nucleusMat);
+    nucleus.position.set(1.2, 0.9, 0.8);
+    plantGroup.add(nucleus);
+
+    var nucleolusGeo = new THREE.SphereGeometry(0.18, 32, 32);
+    var nucleolusMat = new THREE.MeshStandardMaterial({ color: 0xdb2777 });
+    var nucleolus = new THREE.Mesh(nucleolusGeo, nucleolusMat);
+    nucleolus.position.set(-0.08, 0.08, 0.08);
+    nucleus.add(nucleolus);
+
+    var erGroup = new THREE.Group();
+    erGroup.position.copy(nucleus.position);
+    plantGroup.add(erGroup);
+
+    for (let i = 0; i < 3; i++) {
+        let erRadius = 0.75 + (i * 0.15);
+        let erGeo = new THREE.TorusGeometry(erRadius, 0.05, 8, 32, Math.PI * 1.2);
+        let erMat = new THREE.MeshStandardMaterial({
+            color: 0xe8b49f,
+            emissive: 0x2d1b18,
+            roughness: 0.5,
+            side: THREE.DoubleSide
+        });
+        let erMesh = new THREE.Mesh(erGeo, erMat);
+        erMesh.rotation.set(Math.PI / 2, Math.random() * 0.5, i * 0.4);
+        erGroup.add(erMesh);
+
+        for (let r = 0; r < 8; r++) {
+            let riboGeo = new THREE.SphereGeometry(0.025, 6, 6);
+            let riboMat = new THREE.MeshStandardMaterial({ color: 0xd97706 });
+            let ribo = new THREE.Mesh(riboGeo, riboMat);
+            let angle = Math.random() * Math.PI * 1.2;
+            ribo.position.set(Math.cos(angle) * erRadius, (Math.random() - 0.5) * 0.08, Math.sin(angle) * erRadius);
+            erGroup.add(ribo);
+        }
+    }
+
+    var chloroGroup = new THREE.Group();
+    plantGroup.add(chloroGroup);
+    var chloroGeo = new THREE.CylinderGeometry(0.24, 0.24, 0.14, 24);
+    var chloroMat = new THREE.MeshStandardMaterial({ color: 0x16a34a, roughness: 0.4 });
+    var chloroPositions = [
+        [-1.4, 1.4, 1.2], [-1.5, -1.2, 0.8], [1.3, -1.4, 1.0], 
+        [-1.2, 1.3, -1.4], [1.5, -1.1, -0.9], [-1.6, 0.2, -1.1]
+    ];
+    chloroPositions.forEach(pos => {
+        var c = new THREE.Mesh(chloroGeo, chloroMat);
+        c.position.set(pos[0], pos[1], pos[2]);
+        c.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+        chloroGroup.add(c);
+    });
+
+    var mitoGeo = new THREE.CapsuleGeometry(0.1, 0.24, 16, 32);
+    var mitoMat = new THREE.MeshStandardMaterial({ color: 0xdc2626, roughness: 0.4 });
+    var mitoPositions = [
+        [-1.3, 1.2, -0.5], [-1.2, -1.5, -0.5], [1.4, -0.2, -1.4], [-0.5, 1.6, 0.8]
+    ];
+    mitoPositions.forEach(pos => {
+        var m = new THREE.Mesh(mitoGeo, mitoMat);
+        m.position.set(pos[0], pos[1], pos[2]);
+        m.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+        plantGroup.add(m);
+    });
+
+    function animationLoop(t) {
+        plantGroup.rotation.y = t / 9000;
+        plantGroup.rotation.x = Math.sin(t / 11000) * 0.08;
+
+        erGroup.children.forEach((child, index) => {
+            if (child instanceof THREE.Mesh && child.geometry instanceof THREE.TorusGeometry) {
+                let scaleFactor = 1 + Math.sin(t / 1000 + index) * 0.02;
+                child.scale.set(scaleFactor, scaleFactor, 1);
+            }
+        });
+
+        var vacPosAttr = vacGeo.attributes.position;
+        var timeFactor = t / 400;
+        for (let i = 0; i < vacPosAttr.count; i++) {
+            let x = vacPosAttr.getX(i);
+            let y = vacPosAttr.getY(i);
+            let z = vacPosAttr.getZ(i);
+            let wave = Math.sin(x * 2.0 + timeFactor) * 0.02 + Math.cos(y * 2.0 + timeFactor) * 0.02;
+            vacPosAttr.setY(i, y + wave * 0.1);
+        }
+        vacGeo.computeVertexNormals();
+        vacPosAttr.needsUpdate = true;
+
+        controls.update();
+        renderer.render(scene, camera);
+    }
+    renderer.setAnimationLoop(animationLoop);
+
+    function resizePlantCell() {
+        if (container.clientWidth > 0 && container.clientHeight > 0) {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth - 16, container.clientHeight - 16);
+        }
+    }
+    window.addEventListener('resize', resizePlantCell);
+    resizePlantCell();
 }
