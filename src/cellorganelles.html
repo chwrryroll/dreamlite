@@ -8,9 +8,15 @@
     <title>Cell Organelles</title>
 </head>
 <body class="cellorganelles">
-    <div id="navbar"> 
-        <h1>Dreamlite</h1> <button>View Information</button>
-    </div>
+
+    <div id="navbar">
+    <h1>Dreamlite</h1>
+
+    <button id="info_btn">
+        Show Information
+    </button>
+</div>
+
     <div id="cell_bar">
         <button id="btn_nucleus">Nucleus</button>
         <button id="btn_mitochondria">Mitochondria</button>
@@ -29,6 +35,30 @@
     <div class="codia" id="vacuoles_dia"></div>
     <div class="codia" id="ac_dia"></div>
     <div class="codia" id="pc_dia"></div>
-    <script type="module" src="./main.js"></script>
+
+    <div id="info_panel">
+
+    <button id="close_info">
+        ✕
+    </button>
+
+    <img id="info_image" alt="Organelle Diagram">
+
+    <h2 id="info_title"></h2>
+
+    <div class="info_section">
+        <h3>Function</h3>
+        <p id="info_function"></p>
+    </div>
+
+    <div class="info_section">
+        <h3>Interesting Facts</h3>
+        <ul id="fact_list"></ul>
+    </div>
+
+</div>
+
+<script type="module" src="./main.js"></script>
+
 </body>
 </html>

@@ -8,18 +8,31 @@ body {
 }
 
 #navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   padding: 10px 20px;
+
   background: rgba(255, 255, 255, 0.02);
   border-bottom: 1px solid rgba(191, 167, 111, 0.2);
 }
-#navbar button{
+
+#navbar h1 {
+  margin: 0;
+}
+
+#navbar button {
   height: 35px;
   padding: 0 15px;
+
   background: transparent;
   color: #bfa76f;
+
   border: 2px solid #bfa76f;
+
   cursor: pointer;
-  white-space: nowrap;
+
   transition: all 0.3s ease;
 }
 
@@ -60,4 +73,80 @@ body {
 
 .codia.active {
   display: flex;
+}
+
+#info_panel{
+
+    position: fixed;
+
+    top: 0;
+    right: -420px;
+
+    width: 350px;
+    height: 100vh;
+
+    padding: 20px;
+
+    background: #080808;
+
+    border-left: 2px solid #bfa76f;
+
+    color: #bfa76f;
+
+    transition: right .35s ease;
+
+    overflow-y: auto;
+
+    z-index: 9999;
+}
+
+#info_panel.open{
+    right: 0;
+}
+
+#close_info{
+
+    background: transparent;
+
+    color: #bfa76f;
+
+    border: 2px solid #bfa76f;
+
+    padding: 8px 12px;
+
+    cursor: pointer;
+
+    margin-bottom: 15px;
+}
+
+#close_info:hover{
+
+    background: #bfa76f;
+
+    color: #111;
+}
+
+.info_section{
+    margin-top: 20px;
+}
+
+#fact_list{
+    padding-left: 20px;
+}
+
+#fact_list li{
+    margin-bottom: 8px;
+}
+
+#info_image{
+
+    width: 100%;
+
+    border: 2px solid #bfa76f;
+
+    margin-bottom: 15px;
+
+    border-radius: 8px;
+
+    object-fit: contain;
 }
