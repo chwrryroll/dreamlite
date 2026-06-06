@@ -82,7 +82,7 @@ Each organelle is built as a separate JavaScript module
 
 ## How to run?
 
-Deployment available on: ![Dreamlite](https://dreamlite.vercel.app/)
+Deployment available on: [Dreamlite](https://dreamlite.vercel.app/)
 
 But to run locally , ensure you have Node.js installed on your system!
 
