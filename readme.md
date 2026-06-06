@@ -2,75 +2,108 @@
 
 ## Overview
 
-Dreamlite is an interactive 3D educational simulator for science and mathematics concepts. It visualizes important diagrams and visuals which helps in understanding the concept better.
+Dreamlite is 3D visualisation of STEM diagrams so it helps learners understand concept well!
 
+---
 
 ## Current Modules
 
 ### Science Module
 
-The science module includes interactive simulations of cellular organelles.
+The first visualisation is **Cell Organelles**. It consists of:
 
-Nucleus simulation with chromatin level detail and structural animation  
-Endoplasmic reticulum with folded membrane networks  
-Mitochondria with internal structure and motion  
-Golgi apparatus simulation  
-Lysosomes simulation  
-Vacuoles simulation  
-Animal cell full system view  
-Plant cell full system view  
+-Nucleus simulation with chromatin details.
+-Endoplasmic reticulum with folded membrane.  
+-Mitochondria with matrix and DNA animations.
+-Golgi apparatus simulation with ribosome particles.
+-Lysosomes simulation 
+-Vacuoles simulation  
+-Animal cell full system view  
+-Plant cell full system view  
 
-Each organelle is implemented as an independent 3D system.
+**2.Periodic table**
 
-## Mathematics Module
+The periodic table is extended in another repository. Do checkout ![Periodic-Table-Repository](https://github.com/sCherry1101/periodic-table)
 
-Not implemented yet
 
-Planned ideas include  
-3D graph visualization  
-Geometry systems  
+## Technology/Mathematics/Engineering Modules
  
+Not implemented yet! But following are few ideas which will be implemented in future:
+
+-3D graph visualization  
+-Euclid Geometry visualisation
+-Pythagores theorem visualisation
+-Circuits
+
+
+---
 
 ## Screenshots
 
 ### Nucleus
-![Nucleus](./screenshots/nucleus.png)
+![Nucleus](./public/nucleus.png)
 
 ### Endoplasmic Reticulum
-![Endoplasmic Reticulum](./screenshots/er.png)
+![Endoplasmic Reticulum](./public/er.png)
 
 ### Mitochondria
-![Mitochondria](./screenshots/mitochondria.png)
+![Mitochondria](./public/mitochondria.png)
 
 ### Animal Cell
-![Animal Cell](./screenshots/ac.png)
+![Animal Cell](./public/ac.png)
+
+---
 
 ## How Modules Work
 
 Each organelle is built as a separate JavaScript module
 
-Each module  
-Creates its own Three.js scene  
-Sets up its own camera and renderer  
-Builds geometry and materials  
-Runs its own animation loop  
-Handles resizing independently  
+-Each module  
+-Creates its own Three.js scene  
+-Sets up its own camera and renderer  
+-Builds geometry and materials  
+-Runs its own animation loop  
 
-Modules are imported into a central main file and initialized when needed
+*Modules are imported into a central main file and initialized when needed*
+
+---
 
 ## Tech Stack
 
-Three.js
-Vanilla JavaScript (ES Modules)
-HTML
-CSS
-Vite
+-Three.js
+-Vanilla JavaScript 
+-Svelte (Periodic table)
+-HTML
+-CSS
+-Vite
+-Vercel for deployment
+
+---
 
 ## How to run?
 
-```
-npm install
-npm run dev
+Deployment available on: ![Dreamlite]()
 
-```
+But to run locally , ensure you have Node.js installed on your system!
 
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/sCherry1101/dreamlite.git](https://github.com/sCherry1101/dreamlite.git)
+   ```
+
+2. Navigate 
+    ```bash
+    cd dreamlite/dreamlite
+    ```
+3. Install dependencies 
+    ```bash
+    npm install
+    ```
+4. Run
+    ``bash
+    npm run dev
+    ```
+
+## Credits!
+
+Special thanks to [@chwrryroll](https://github.com/chwrryroll) for the suggestions, development resources, and refrences regarding the project and Svelte :)
