@@ -12,14 +12,14 @@ Dreamlite is 3D visualisation of STEM diagrams so it helps learners understand c
 
 The first visualisation is **Cell Organelles**. It consists of:
 
--Nucleus simulation with chromatin details.
--Endoplasmic reticulum with folded membrane.  
--Mitochondria with matrix and DNA animations.
--Golgi apparatus simulation with ribosome particles.
--Lysosomes simulation 
--Vacuoles simulation  
--Animal cell full system view  
--Plant cell full system view  
+- Nucleus simulation with chromatin details.
+- Endoplasmic reticulum with folded membrane.  
+- Mitochondria with matrix and DNA animations.
+- Golgi apparatus simulation with ribosome particles.
+- Lysosomes simulation 
+- Vacuoles simulation  
+- Animal cell full system view  
+- Plant cell full system view  
 
 **2.Periodic table**
 
@@ -30,10 +30,10 @@ The periodic table is extended in another repository. Do checkout ![Periodic-Tab
  
 Not implemented yet! But following are few ideas which will be implemented in future:
 
--3D graph visualization  
--Euclid Geometry visualisation
--Pythagores theorem visualisation
--Circuits
+- 3D graph visualization  
+- Euclid Geometry visualisation
+- Pythagores theorem visualisation
+- Circuits
 
 
 ---
@@ -82,7 +82,7 @@ Each organelle is built as a separate JavaScript module
 
 ## How to run?
 
-Deployment available on: ![Dreamlite]()
+Deployment available on: ![Dreamlite](https://dreamlite.vercel.app/)
 
 But to run locally , ensure you have Node.js installed on your system!
 
